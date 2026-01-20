@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migraine Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Migraine Tracker</h1>
+  
+  <form id="form">
+    <label>Date <input type="date" name="date" required></label>
+    <label>Time <input type="time" name="time" required></label>
+    <label>Type
+      <select name="type">
+        <option>Headache</option>
+        <option>Migraine</option>
+      </select>
+    </label>
+    <fieldset>
+      <legend>Cause</legend>
+      <label><input type="checkbox" name="cause" value="Stress"> Stress</label>
+      <label><input type="checkbox" name="cause" value="Lack of Sleep"> Lack of Sleep</label>
+      <label><input type="checkbox" name="cause" value="Food Trigger"> Food Trigger</label>
+      <label><input type="checkbox" name="cause" value="Weather"> Weather</label>
+      <label><input type="checkbox" name="cause" value="Screen Time"> Screen Time</label>
+      <label><input type="checkbox" name="cause" value="Dehydration"> Dehydration</label>
+      <label><input type="checkbox" name="cause" value="Hormonal"> Hormonal</label>
+    </fieldset>
+    <fieldset>
+      <legend>Precursor</legend>
+      <label><input type="checkbox" name="precursor" value="Aura"> Aura</label>
+      <label><input type="checkbox" name="precursor" value="Fatigue"> Fatigue</label>
+      <label><input type="checkbox" name="precursor" value="Neck Tension"> Neck Tension</label>
+      <label><input type="checkbox" name="precursor" value="Mood Change"> Mood Change</label>
+    </fieldset>
+    <fieldset>
+      <legend>Symptoms</legend>
+      <label><input type="checkbox" name="symptoms" value="Pain"> Pain</label>
+      <label><input type="checkbox" name="symptoms" value="Nausea"> Nausea</label>
+      <label><input type="checkbox" name="symptoms" value="Light Sensitivity"> Light Sensitivity</label>
+      <label><input type="checkbox" name="symptoms" value="Sound Sensitivity"> Sound Sensitivity</label>
+      <label><input type="checkbox" name="symptoms" value="Vision Issues"> Vision Issues</label>
+    </fieldset>
+    <fieldset>
+      <legend>Treatment</legend>
+      <label><input type="checkbox" name="treatment" value="Ibuprofen"> Ibuprofen</label>
+      <label><input type="checkbox" name="treatment" value="Acetaminophen"> Acetaminophen</label>
+      <label><input type="checkbox" name="treatment" value="Triptan"> Triptan</label>
+      <label><input type="checkbox" name="treatment" value="Rest"> Rest</label>
+      <label><input type="checkbox" name="treatment" value="Caffeine"> Caffeine</label>
+      <label><input type="checkbox" name="treatment" value="Cold Compress"> Cold Compress</label>
+    </fieldset>
+    <label>Result
+      <select name="result">
+        <option>Resolved</option>
+        <option>Improved</option>
+        <option>No Change</option>
+        <option>Worsened</option>
+      </select>
+    </label>
+    <label>Notes <input type="text" name="notes"></label>
+    
+    <div class="actions">
+      <button type="submit" class="btn-primary">Save</button>
+      <button type="button" class="btn-secondary" id="export-btn">Export CSV</button>
+    </div>
+  </form>
+  
+  <table>
+    <thead><tr><th>Date</th><th>Type</th><th>Cause</th><th>Treatment</th><th>Result</th></tr></thead>
+    <tbody id="history"></tbody>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
