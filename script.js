@@ -38,6 +38,10 @@ function render() {
   const entries = load();
   history.innerHTML = entries.slice(0, 10).map((e, i) => 
     `<tr data-index="${i}" class="${i === editIndex ? 'editing' : ''}">
+      <td class="row-actions">
+        <button type="button" class="btn-icon" onclick="editRow(${i})">✎</button>
+        <button type="button" class="btn-icon btn-delete" onclick="deleteRow(${i})">✕</button>
+      </td>
       <td>${e.date}</td><td>${e.type}</td><td>${e.cause || '-'}</td><td>${e.treatment || '-'}</td><td>${e.result}</td>
     </tr>`
   ).join('');
@@ -48,17 +52,8 @@ function clearEdit() {
   cancelBtn.style.display = 'none';
   form.reset();
   form.date.value = new Date().toISOString().split('T')[0];
-  render();
+  populateTimeDropdown();
 }
-
-history.onclick = (e) => {
-  const row = e.target.closest('tr');
-  if (!row) return;
-  editIndex = parseInt(row.dataset.index);
-  populateForm(load()[editIndex]);
-  cancelBtn.style.display = 'inline-block';
-  render();
-};
 
 cancelBtn.onclick = clearEdit;
 
@@ -86,3 +81,39 @@ document.getElementById('export-btn').onclick = () => {
 
 form.date.value = new Date().toISOString().split('T')[0];
 render();
+
+function populateTimeDropdown() {
+  const timeSelect = form.querySelector('[name="time"]');
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMin = Math.floor(now.getMinutes() / 15) * 15;
+  
+  timeSelect.innerHTML = '';
+  
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 15) {
+      const label = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+      const option = new Option(label, label);
+      if (h === currentHour && m === currentMin) option.selected = true;
+      timeSelect.add(option);
+    }
+  }
+}
+
+populateTimeDropdown();
+
+function editRow(i) {
+  editIndex = i;
+  populateForm(load()[i]);
+  cancelBtn.style.display = 'inline-block';
+  render();
+}
+
+function deleteRow(i) {
+  if (!confirm('Delete this entry?')) return;
+  const entries = load();
+  entries.splice(i, 1);
+  save(entries);
+  if (editIndex === i) clearEdit();
+  else render();
+}
