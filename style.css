@@ -50,8 +50,8 @@ button {
   font-size: 0.9rem;
 }
 
-.btn-primary { background: #3b82f6; color: white; }
-.btn-primary:hover { background: #2563eb; }
+.btn-primary { background: #4b6cb7; color: white; }
+.btn-primary:hover { background: #5a7dc4; }
 .btn-secondary { background: #374151; color: #e0e0e0; }
 .btn-secondary:hover { background: #4b5563; }
 .btn-cancel { background: #dc2626; color: white; }
